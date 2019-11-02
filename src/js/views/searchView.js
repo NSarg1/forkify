@@ -14,6 +14,18 @@ export const clearResult = () => {
     elements.searchResPages.innerHTML = '';
 }
 
+
+export const highlightSelected = id => {
+    const resultsArr = Array.from(document.querySelectorAll('.results__link'))
+    resultsArr.forEach(el => {
+        el.classList.remove('results__link--active')
+    });
+    document.querySelector(`a[href*="#${id}"]`).classList.add('results__link--active');
+};
+
+
+
+
 const limitRecipeTitle = (title, limit = 17) => {
     const newTitle = [];
     if (title.length > limit) {
@@ -50,7 +62,7 @@ const renderRecipe = recipe => {
 }
 
 const createButton = (page, type) => `
-<button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page -1 : page + 1}>
+<button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>
     <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
     <svg class="search__icon">
         <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
@@ -86,7 +98,7 @@ export const renderResults = (recipes, page = 1, resPerPage = 10) => {
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
     recipes.slice(start, end).forEach(renderRecipe);
-    
+
     //render pagination
 
     renderButtons(page, recipes.length, resPerPage)
