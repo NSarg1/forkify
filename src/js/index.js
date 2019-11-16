@@ -8,7 +8,6 @@ import * as listView from './views/listView';
 import * as likesView from './views/likesView';
 import { elements, renderLoader, clearLoader } from './views/base';
 
-alert('Note: If it gives error trying to search, it is because the quantity of search queries is limited by provider(Daily 50). Thank you for understanding.')
 
 /** Global state of the app
  * - Search object
